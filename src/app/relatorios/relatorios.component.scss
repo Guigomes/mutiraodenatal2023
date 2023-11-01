@@ -1,0 +1,72 @@
+.example-card {
+  max-width: 1000px;
+  min-width: 1000px;
+}
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+
+.mat-row {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover {
+  background-color: gainsboro;
+  color: white;
+  border-color: currentColor;
+}
+
+.min-width-80 {
+  margin-top: 4px;
+  min-width: 80vw;
+  float: right;
+  background-color: white;
+}
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+.tabela-resumos mat-cell {
+  font-size: 12px;
+}
+.tabela-resumos {
+  min-width: 80vw;
+}
+@media (max-width: 600px) {
+  .tabela-resumos mat-cell {
+    text-align: center;
+    font-size: 9px;
+  }
+  .tabela-resumos {
+    min-width: 10vw;
+  }
+
+  .tabela-resumos mat-cell {
+    text-align: center;
+    font-size: 9px;
+  }
+
+  .titulo-selecionar {
+    font-size: 12px;
+  }
+}
+
+.mat-column-cliente {
+  flex: 0 0 25%;
+}
+.mat-column-data {
+  flex: 0 0 20%;
+}
+.mat-column-titulo {
+  flex: 0 0 35%;
+}
+.mat-column-action {
+  flex: 0 0 20%;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+  width: 229px!important;
+  height: 300px!important;
+}

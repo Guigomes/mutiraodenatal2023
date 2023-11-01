@@ -1,0 +1,355 @@
+<mat-progress-bar mode="indeterminate" *ngIf="mostrarProgressBar"></mat-progress-bar>
+
+<div fxLayout="column" style="margin-top: 50px">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <mat-card class="bigger-card" id="card-form">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>description</mat-icon>
+        </div>
+        <mat-card-title>{{ title }} </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-stepper [linear]="false" [orientation]="getScreenWidth <= 600 ? 'vertical' : 'horizontal'" #stepper
+          animationDuration="1000">
+          <mat-step [stepControl]="informacoesGeraisFormGroup">
+            <form [formGroup]="informacoesGeraisFormGroup">
+              <ng-template matStepLabel>Informações Gerais</ng-template>
+
+              <div fxLayout="row" class="big-form-field">
+                <mat-form-field appearance="outline">
+                  <mat-label>Título</mat-label>
+
+                  <input matInput placeholder="Título" formControlName="titulo" required />
+                </mat-form-field>
+              </div>
+              <div fxLayout="row " class="big-form-field">
+                <mat-form-field appearance="outline">
+                  <mat-label>Cliente</mat-label>
+
+                  <input matInput placeholder="Cliente" formControlName="cliente" required="" />
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" class="big-form-field">
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Local da Obra</mat-label>
+
+                  <input matInput placeholder="Local da Obra" formControlName="local" />
+                </mat-form-field>
+              </div>
+              <div fxLayout="row wrap" fxLayoutGap="20px">
+
+                <div fxLayout="column" fxFlex>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Cidade</mat-label>
+
+                    <input matInput placeholder="Cidade" formControlName="cidade" />
+                  </mat-form-field>
+                </div>
+
+                <div fxLayout="column" fxFlex>
+                  <mat-form-field appearance="outline">
+                    <mat-label>UF</mat-label>
+                    <mat-select formControlName="uf">
+                      <mat-option *ngFor="let uf of ufs" [value]="uf">
+                        {{uf}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxLayout="column" fxFlex>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Data</mat-label>
+
+                    <input matInput placeholder="Data" formControlName="data" required type="date" />
+                  </mat-form-field>
+                </div>
+
+                <div fxLayout="column" fxFlex>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Revestimento</mat-label>
+
+                    <input matInput placeholder="Revestimento" formControlName="revestimento" />
+                  </mat-form-field>
+                </div>
+
+                <div fxLayout="column" fxFlex>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Poço</mat-label>
+
+                    <input matInput placeholder="Poço" formControlName="poco" type="number" />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="row wrap" fxLayoutGap="20px">
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Diâmetro</mat-label>
+
+                  <input matInput placeholder="Diâmetro" formControlName="diametro" />
+                  <span matTextSuffix>polegadas</span>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Nível estático</mat-label>
+
+                  <input matInput placeholder="Nível estático" formControlName="nivel" 
+                     />
+                  <span matTextSuffix style="float: right">metros</span>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Fim revestimento</mat-label>
+
+                  <input  matInput
+                    placeholder="Fim revestimento" formControlName="fimRevestimento" />
+                  <span matTextSuffix style="float: right">metros</span>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Redução</mat-label>
+
+                  <input matInput placeholder="Redução" formControlName="reducao" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Profundidade</mat-label>
+
+                  <input matInput placeholder="Profundidade" formControlName="profundidade"   />
+                  <span matTextSuffix style="float: right">metros</span>
+                </mat-form-field>
+              </div>
+
+              <div>
+                <button mat-raised-button color="primary" (click)="validarSubmit(stepper)">
+                  Próximo
+                </button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="observacoesFormGroup">
+            <form [formGroup]="observacoesFormGroup">
+              <ng-template matStepLabel>Observações</ng-template>
+              <mat-form-field class="example-full-width">
+                <mat-label>Coloque todas as suas observações</mat-label>
+                <textarea matInput rows="20" formControlName="observacoes"
+                  placeholder="Ex. , água levemente turva..."></textarea>
+              </mat-form-field>
+              <div fxLayout="row" fxLayoutGap="30px">
+                <button mat-raised-button matStepperPrevious>Voltar</button>
+                <button mat-raised-button color="primary" matStepperNext>
+                  Próximo
+                </button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Características do Poço</ng-template>
+
+            <h2><strong>Eventos</strong></h2>
+            <mat-divider></mat-divider>
+            <div *ngIf="getScreenWidth <=600">
+              <div *ngFor="let data of dataSource.data; let i = index">
+                <mat-card style="margin-bottom: 7px;">
+                  <mat-card-title style="font-size: 14px;">Evento {{i+1}}</mat-card-title>
+                  <mat-card-content>
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="Profundidade" [(ngModel)]="data.profundidade"
+                        (blur)="validarInserirNovaLinha(i)" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="Evento" [(ngModel)]="data.evento"
+                        (blur)="validarInserirNovaLinha(i)" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="Observação" [(ngModel)]="data.obs"
+                        (click)="validarInserirNovaLinha(i)" (blur)="validarInserirNovaLinha(i)" />
+                    </mat-form-field>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="getScreenWidth >600">
+              <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index">
+                  {{ element.position }}
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="profundidade">
+                <mat-header-cell *matHeaderCellDef>Profundidade (m)</mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index" (click)="validarInserirNovaLinha(i)">
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Profundidade" [(ngModel)]="dataSource.data[i].profundidade"
+                      (blur)="validarInserirNovaLinha(i)" />
+                  </mat-form-field>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="evento">
+                <mat-header-cell *matHeaderCellDef>Evento</mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index" (click)="validarInserirNovaLinha(i)">
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Evento" [(ngModel)]="dataSource.data[i].evento"
+                      (blur)="validarInserirNovaLinha(i)" />
+                  </mat-form-field>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="obs">
+                <mat-header-cell *matHeaderCellDef>Observação</mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index" (click)="validarInserirNovaLinha(i)">
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Observação" [(ngModel)]="dataSource.data[i].obs"
+                      (click)="validarInserirNovaLinha(i)" (blur)="validarInserirNovaLinha(i)" />
+                  </mat-form-field>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
+
+            <div fxLayout="row" fxLayoutGap="30px" style="margin-top: 10px">
+              <button mat-raised-button matStepperPrevious>Voltar</button>
+              <button mat-raised-button color="primary" matStepperNext>
+                Próximo
+              </button>
+              <span class="example-spacer"></span>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Imagens</ng-template>
+            <div fxLayout="column" *ngIf="getScreenWidth <= 600">
+              <div fxLayout="column" fxFlex *ngIf="imageURL == undefined || imageURL.length == 0">
+
+                <mat-grid-list cols="3" rowHeight="1:1">
+
+                  <mat-grid-tile *ngFor="let item of items" (click)="ampliarImagem(item)"><img class="img-responsive"
+                      src="{{ item.url }}" style="max-width: 240px; object-fit: cover" /></mat-grid-tile>
+
+                </mat-grid-list>
+              </div>
+              <form [formGroup]="uploadForm" (ngSubmit)="submit()">
+                <!-- Select File -->
+                <input type="file" accept="image/*" #fileInput hidden (change)="showPreview($event)" />
+                <h3 style=" margin-left: 1em;">Selecione a imagem que deseja anexar e informe a legenda.</h3>
+                <button type="button" mat-raised-button color="primary"
+                  style="position: relative; margin-bottom: 2em; margin-left: 1em;"
+                  (click)="fileInput.click()">Selelecionar a imagem...</button>
+            
+
+
+              <div *ngIf="imageURL && imageURL !== ''">
+                <img [src]="imageURL" [alt]="uploadForm.value.name" class="imagePreview" />
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" *ngIf="imageURL && imageURL !== ''"
+                style="margin-top: 10px;">
+           
+
+                <div fxLayout="row" style="vertical-align: middle;" >
+                  <mat-form-field appearance="outline">
+                    <mat-label>Legenda</mat-label>
+
+                    <textarea matInput rows="5" maxlength="200" formControlName="legenda"
+                      placeholder="Legenda da Imagem" required></textarea>
+                    <span style="font-size: 10px; color: #7eb8e0;">{{uploadForm.value.legenda.length}}/200</span>
+                  </mat-form-field>
+
+
+                </div>
+                <div fxLayout="row">
+                  <button mat-raised-button color="primary" type="submit" style="margin-bottom: 1em;">
+                    Anexar imagem
+                  </button>
+                </div>
+              </div>
+            </form>
+            </div>
+
+
+
+
+            <div fxLayout="row" *ngIf="getScreenWidth > 600">
+              <div fxLayout="column" fxFlex="45">
+                <mat-grid-list cols="3" rowHeight="1:1">
+
+                  <mat-grid-tile *ngFor="let item of items" (click)="ampliarImagem(item)"><img class="img-responsive"
+                      src="{{ item.url }}" style="max-width: 240px; object-fit: cover" /></mat-grid-tile>
+
+                </mat-grid-list>
+
+              </div>
+              <div fxLayout="column" style="margin-left: 1em; margin-right: 1em;">
+                <mat-divider vertical style="height: 40em"></mat-divider>
+              </div>
+              <div fxLayout="column" fxFlex="45">
+                <form [formGroup]="uploadForm" (ngSubmit)="submit()">
+                  <!-- Select File -->
+                  <input type="file" accept="image/*" #fileInput hidden (change)="showPreview($event)" />
+                  <h3 style=" margin-left: 1em;">Selecione a imagem que deseja anexar e informe a legenda.</h3>
+                  <button type="button" mat-raised-button color="primary"
+                    style="position: relative; margin-bottom: 2em; margin-left: 1em;"
+                    (click)="fileInput.click()">Selelecionar a imagem...</button>
+
+
+                  <div fxLayout="row" fxLayoutAlign="center center">
+                    <div *ngIf="imageURL && imageURL !== ''">
+                      <img [src]="imageURL" [alt]="uploadForm.value.name" class="imagePreview" />
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px"
+                    *ngIf="imageURL && imageURL !== ''" style="margin-top: 10px;">
+                    <div fxLayout="column" style="vertical-align: middle;" fxFlex="70">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Legenda</mat-label>
+
+                        <textarea matInput rows="5" maxlength="200" formControlName="legenda"
+                          placeholder="Legenda da Imagem" required></textarea>
+                        <span style="font-size: 10px; color: #7eb8e0;">{{uploadForm.value.legenda.length}}/200</span>
+                      </mat-form-field>
+
+
+                    </div>
+                    <div fxLayout="column" fxFlex="30">
+                      <button mat-raised-button color="primary" type="submit" style="margin-bottom: 1em;">
+                        Anexar imagem
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="30px">
+              <button mat-raised-button matStepperPrevious>Voltar</button>
+
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="end" class="save-buttons">
+          <button mat-raised-button style="background-color: green; color: white" (click)="salvar()">
+            <mat-icon>save</mat-icon>
+            Salvar
+          </button>
+          <button (click)="preview()" mat-raised-button style="background-color: red; color: white">
+            <mat-icon>picture_as_pdf</mat-icon>
+            Gerar PDF
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

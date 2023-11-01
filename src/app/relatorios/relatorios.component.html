@@ -1,0 +1,71 @@
+<mat-progress-bar mode="indeterminate" *ngIf="mostrarProgressBar"></mat-progress-bar>
+
+<div style="padding-top: 50px" fxLayout="column" *ngIf="!mostrarProgressBar">
+  <div fxLayout="column">
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlexAlign="left">
+        <button *ngIf="isUsuarioLogado()" mat-raised-button color="primary" (click)="criarNovoRelatorio()">
+          <mat-icon>add</mat-icon>
+          Criar novo relatório
+        </button>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 10px; margin-bottom: 10px">
+
+      <h1 class="titulo-selecionar">Selecione o relatório que deseja editar ou crie um novo.</h1>
+    </div>
+
+
+    <div fxLayout="column"  fxLayoutAlign="start center" style="margin-bottom: 30px;" *ngIf="isUsuarioLogado()"
+     >
+      <p *ngIf="resumos.length == 0 && !mostrarProgressBar">
+        Você ainda não criou nenhum relatório. Clique no botão acima para
+        criar.
+      </p>
+    
+      <mat-table *ngIf="resumos.length > 0" [dataSource]="dataSource"  class="mat-elevation-z8 tabela-resumos">
+        <ng-container matColumnDef="cliente">
+          <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index" (click)="abrirRelatorio(element)">
+            {{ element.cliente }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="data">
+          <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index" (click)="abrirRelatorio(element)">
+            {{ element.data | date : 'dd/MM/yyyy'}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="titulo">
+          <mat-header-cell *matHeaderCellDef>Titulo</mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index" (click)="abrirRelatorio(element)">
+            {{ element.titulo }}
+          </mat-cell>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index">
+            <button mat-button (click)="deletar(element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="colunasTabelaResumos"></mat-header-row>
+        <mat-row [class.demo-row-is-clicked]="clickedRows.has(row)" *matRowDef="let row; columns: colunasTabelaResumos">
+        </mat-row>
+
+
+      </mat-table>
+      <div fxLayout="row" class="min-width-80" *ngIf="resumos.length > 0">
+        <mat-paginator #paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons
+          aria-label="Select page of periodic elements"> </mat-paginator>
+      </div>
+
+    </div>
+
+  </div>
+</div>

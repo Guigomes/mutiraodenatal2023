@@ -1,0 +1,37 @@
+<mat-progress-bar
+  mode="indeterminate"
+  *ngIf="mostrarProgressBar"
+></mat-progress-bar>
+
+<div fxLayout="column" style="margin-top: 50px">
+  <div id="pdf">
+    <img src="../../assets/header.jpg" />
+
+    <p class="titulo">{{ relatorio.titulo }}</p>
+
+    <div class="titulo">
+      <p>Cliente:</p>
+      <p>{{ relatorio.cliente }}</p>
+
+      <p>LOCAL E DATA:</p>
+      <p>{{ relatorio.local }} {{ relatorio.data }}</p>
+    </div>
+    <p class="descricao">
+      O trabalho de perfilagem ótica é composto de DVD contendo imagens
+      coloridas geradas por câmeras introduzidas simultaneamente em um poço e um
+      relatório com informações sobre as imagens captadas pelas câmeras. A
+      combinação das duas situações auxilia a tomada de decisões no ato de
+      trabalhar o poço.
+    </p>
+
+    <p class="descricao">
+      Rua Lilia Elisa Eberle Lupo, 501 - casa 187 - Salto Grande CEP: 14.803 -
+      886 Araraquara SP Fone: (16) 3322 - 0619
+    </p>
+  </div>
+</div>
+
+<button mat-raised-button color="primary" (click)="gerar()">
+  <mat-icon>arrow_back</mat-icon>
+  Gerar
+</button>

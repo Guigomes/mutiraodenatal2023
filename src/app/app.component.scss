@@ -1,0 +1,141 @@
+.container{
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+.aviso-logar{
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.div-aviso{
+  line-height: 5vh; max-width: 50vw!important;
+}
+.toolbar{
+ 
+  background-color: white ;
+  font-size: 10rem;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+}
+
+.toolbar-2{
+  background-color: #d2ab4a;
+  color: white;
+  font-size: 2em;
+}
+
+.dancing-font{
+ 
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.responsive-image {
+  height: 13vh;
+}
+
+
+.responsive-image-pastor {
+  height: 30vh;
+}
+
+.card-form{
+  margin: 5px;
+
+}
+
+.bold-big{
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.imagem-galeria{
+  max-width: 50vw; 
+  max-height: 100vh;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-white {
+  height: 24px;
+  width: 24px;
+  
+  border-radius: 50%;
+  display: inline-block;
+  background-color: white;
+  border: 1px black solid;
+}
+
+.equipes{
+  font-size: 16px !important;
+}
+.yellow{
+
+  background-color: yellow;
+
+}
+.blue{
+
+  background-color: blue;
+
+}
+.green{
+
+  background-color: green;
+
+}
+.white{
+
+
+
+}
+
+@media only screen and (max-width: 550px) {
+  .toolbar-2{
+    background-color: #d2ab4a;
+    color: white;
+    font-size: 14px;
+  }
+  
+  #video{
+    object-fit: initial;
+    width: 300px;
+   
+  }
+}
+
+@media only screen and (min-width: 749px) {
+
+#video{
+  object-fit: initial;
+  width: 600px;
+ 
+}
+}
+@media only screen and (min-width: 551px)and (max-width: 750px) {
+  .toolbar-2{
+    background-color: #d2ab4a;
+    color: white;
+    font-size: 20px;
+  }
+  .imagem-galeria{
+    max-width: 75vw; 
+  }
+  
+#video{
+  object-fit: initial;
+  width: 300px;
+ 
+}
+    
+}
